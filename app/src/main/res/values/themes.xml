@@ -1,0 +1,10 @@
+<resources>
+    <style name="Theme.Aeris.Base" parent="@android:style/Theme.Material.Wallpaper.NoTitleBar">
+        <item name="android:windowShowWallpaper">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+    </style>
+    <style name="Theme.Aeris" parent="Theme.Aeris.Base" />
+</resources>
