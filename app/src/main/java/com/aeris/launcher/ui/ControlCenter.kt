@@ -159,7 +159,7 @@ fun ControlCenter(
                 }
                 val track = if (p.mode == ThemeMode.NORMAL) Color(0x33000000) else Color(0x40FFFFFF)
                 Row(horizontalArrangement = Arrangement.spacedBy(12.dp)) {
-                                        VerticalSlider(vm.mediaVolume, { vm.changeMediaVolume(it) }, "🔊", Modifier.width(56.dp).height(158.dp), track)
+                    VerticalSlider(vm.mediaVolume, { vm.changeMediaVolume(it) }, "🔊", Modifier.width(56.dp).height(158.dp), track)
                     VerticalSlider(vm.ringVolume, { vm.changeRingVolume(it) }, "🔔", Modifier.width(56.dp).height(158.dp), track)
                 }
             }

@@ -274,7 +274,7 @@ class LauncherViewModel(app: Application) : AndroidViewModel(app) {
         refreshVolumes()
     }
 
-       fun changeMediaVolume(f: Float) = setStream(AudioManager.STREAM_MUSIC, f)
+    fun changeMediaVolume(f: Float) = setStream(AudioManager.STREAM_MUSIC, f)
     fun changeRingVolume(f: Float) = setStream(AudioManager.STREAM_RING, f)
 
     fun onVolumeKey(up: Boolean) {

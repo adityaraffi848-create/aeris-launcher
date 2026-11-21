@@ -70,7 +70,7 @@ fun VolumeHud(vm: LauncherViewModel, modifier: Modifier) {
             }
             VerticalSlider(
                 value = vm.mediaVolume,
-                                onValueChange = { vm.changeMediaVolume(it); vm.touchHud() },
+                onValueChange = { vm.changeMediaVolume(it); vm.touchHud() },
                 icon = icon,
                 modifier = Modifier.width(46.dp).height(170.dp),
                 trackColor = Color(0x33FFFFFF),

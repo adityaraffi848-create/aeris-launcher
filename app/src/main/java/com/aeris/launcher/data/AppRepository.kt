@@ -91,8 +91,17 @@ class IconRepository(private val context: Context) {
     }
 
     private fun renderSystemIcon(app: AppItem): Bitmap {
-        val d = try { pm.getActivityIcon(app.component) } catch (e: Exception) { pm.defaultActivityIcon }
         val bmp = Bitmap.createBitmap(px, px, Bitmap.Config.ARGB_8888)
+        try {
+            drawSystemIcon(app, bmp)
+        } catch (e: Exception) {
+            Canvas(bmp).drawColor(0xFFE5E5EA.toInt())
+        }
+        return bmp
+    }
+
+    private fun drawSystemIcon(app: AppItem, bmp: Bitmap) {
+        val d = try { pm.getActivityIcon(app.component) } catch (e: Exception) { pm.defaultActivityIcon }
         val c = Canvas(bmp)
         if (d is AdaptiveIconDrawable) {
             // gambar layer penuh (tanpa mask bawaan HP) supaya bentuk ikon seragam
@@ -105,6 +114,5 @@ class IconRepository(private val context: Context) {
             d.setBounds(pad, pad, px - pad, px - pad)
             d.draw(c)
         }
-        return bmp
     }
 }

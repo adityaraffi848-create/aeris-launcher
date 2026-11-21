@@ -23,7 +23,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.platform.LocalContext
-import androidx.core.content.ContextCompat
 import kotlinx.coroutines.delay
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -81,7 +80,7 @@ fun rememberSystemStatus(): SystemStatus {
             addAction(Intent.ACTION_TIME_CHANGED)
             addAction(Intent.ACTION_TIMEZONE_CHANGED)
         }
-        ContextCompat.registerReceiver(context, timeRx, timeFilter, ContextCompat.RECEIVER_NOT_EXPORTED)
+        try { context.registerReceiver(timeRx, timeFilter) } catch (e: Exception) { }
 
         val batRx = object : BroadcastReceiver() {
             override fun onReceive(c: Context?, i: Intent?) {
@@ -94,9 +93,11 @@ fun rememberSystemStatus(): SystemStatus {
                     status == BatteryManager.BATTERY_STATUS_FULL
             }
         }
-        val sticky = ContextCompat.registerReceiver(
-            context, batRx, IntentFilter(Intent.ACTION_BATTERY_CHANGED), ContextCompat.RECEIVER_NOT_EXPORTED,
-        )
+        val sticky = try {
+            context.registerReceiver(batRx, IntentFilter(Intent.ACTION_BATTERY_CHANGED))
+        } catch (e: Exception) {
+            null
+        }
         if (sticky != null) batRx.onReceive(context, sticky)
 
         val cm = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

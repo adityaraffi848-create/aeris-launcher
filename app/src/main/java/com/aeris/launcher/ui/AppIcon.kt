@@ -49,7 +49,7 @@ class AppActions(
 fun AppIconImage(app: AppItem, vm: LauncherViewModel, size: Dp) {
     val s = LocalSettings.current
     val bmp by produceState<ImageBitmap?>(null, app.key, vm.iconVersion) {
-        value = withContext(Dispatchers.Default) { vm.icons.load(app).asImageBitmap() }
+        value = withContext(Dispatchers.Default) { runCatching { vm.icons.load(app).asImageBitmap() }.getOrNull() }
     }
     val shape = RoundedCornerShape(percent = s.iconShape.cornerPercent)
     Box(Modifier.size(size).clip(shape)) {
